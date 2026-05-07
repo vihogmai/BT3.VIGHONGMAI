@@ -63,7 +63,13 @@ Nguyễn Thị II (Mã HĐ 3): Thể hiện quy tắc 1 hợp đồng - nhiều 
 
 - Khách có thể trả nợ từng phần.
 - Chỉ được lấy lại tài sản khi:
-  - Giá trị các tài sản còn lại >= tổng dư nợ hiện tại.
+  - Giá trị các tài sản còn lại >= tổng dư nợ hiện tại.;
+    <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/54eb6d48-6105-4370-a1f4-9d0f6d7b9cbc" />
+    
+Lãi kép (HĐ 2 & 5):** Hệ thống báo **⚠️ Quá hạn**. Hợp đồng 2 vay 5tr từ tháng 2, nợ hiện tại đã vọt lên **9,275,298đ**.
+Rút đồ (HĐ 3):** Nguyễn Thị II có 4 tài sản (53tr) > Dư nợ (16.2tr) nên báo **✅ Đủ đ/k rút bớt đồ**.
+Thanh lý (HĐ 2):** Trạng thái **❌ Đã thanh lý**, hệ thống dừng tính toán lãi và rút đồ.
+Trả nợ gốc (HĐ 1):** Gốc giảm từ 10tr xuống **8,000,000đ**, lãi sẽ giảm theo dư nợ mới.
 
 ## 3. Chức năng chính của hệ thống
 
