@@ -4,135 +4,268 @@
 
 - Họ tên: Vi Hồng Mai
 - MSSV: K235480206049
-- Môn học: Hệ quản trị cơ sở dữ liệu
+- Môn học: Hệ quản trị CSDL
 - Lớp: 59KMT
 - Giảng viên: Đỗ Duy Cốp
 
----
-
-# BÀI TẬP VỀ NHÀ 03
-## THIẾT KẾ VÀ CÀI ĐẶT CSDL QUẢN LÝ CẦM ĐỒ
+# BÀI TẬP VỀ NHÀ 03: THIẾT KẾ VÀ CÀI ĐẶT CSDL QUẢN LÝ CẦM ĐỒ
 
 ## 1. Mô tả bài toán
 
-Hệ thống quản lý các hợp đồng vay tiền thế chấp tài sản.
+Hệ thống cần quản lý các hợp đồng vay tiền thế chấp tài sản. Điểm đặc thù của hệ thống là cơ chế tính lãi linh hoạt, quản lý danh mục tài sản thế chấp và xử lý thanh lý đồ khi quá hạn.
 
-Chức năng chính:
-- Quản lý khách hàng
-- Quản lý hợp đồng cầm cố
-- Quản lý tài sản thế chấp
-- Tính lãi đơn và lãi kép
-- Xử lý thanh lý tài sản quá hạn
+## 2. Các quy tắc nghiệp vụ
 
----
+Sinh viên cần lưu ý các quy tắc sau để thiết kế bảng và viết Query.
 
-## 2. Quy tắc nghiệp vụ
+### Khách hàng & Tài sản
 
-### Khách hàng và tài sản
-
-- Một khách hàng có thể có nhiều hợp đồng cầm cố
-- Một hợp đồng có thể bao gồm nhiều tài sản thế chấp
+- Một khách hàng có thể có nhiều hợp đồng cầm cố.
+- Một hợp đồng có thể bao gồm nhiều tài sản thế chấp khác nhau.
 
 ### Cơ chế lãi suất
 
-- Lãi đơn trước Deadline 1:
-  - 5.000đ / 1.000.000đ / ngày
-- Lãi kép sau Deadline 1:
-  - Tính trên gốc + lãi đơn tích lũy
+#### Lãi đơn (Trước Deadline 1)
+
+- 5.000đ / 1.000.000đ gốc / ngày.
+
+#### Lãi kép (Từ sau Deadline 1)
+
+- Lãi được tính dựa trên:
+  - Gốc + lãi đơn đã tích lũy.
 
 ### Trạng thái hợp đồng
 
 - Đang vay
-- Quá hạn
+- Quá hạn (nợ xấu)
 - Đã thanh toán
 - Đã thanh lý tài sản
 
 ### Quy tắc trả hàng
 
-- Khách được trả nợ từng phần
-- Chỉ được nhận lại tài sản khi:
-  - Giá trị tài sản còn lại >= dư nợ hiện tại
+- Khách có thể trả nợ từng phần.
+- Chỉ được lấy lại tài sản khi:
+  - Giá trị các tài sản còn lại >= tổng dư nợ hiện tại.
 
----
+## 3. Chức năng chính của hệ thống
 
-## 3. Nhiệm vụ thực hiện
+### 1. Quản lý khách hàng
 
-### Thiết kế CSDL
+- Lưu thông tin khách hàng:
+  - Họ tên
+  - Số điện thoại
+  - CCCD
+  - Địa chỉ
+- Theo dõi lịch sử vay của khách hàng.
 
-- Vẽ sơ đồ ERD
-- Thiết kế bảng dữ liệu
-- Chuẩn hóa dữ liệu đến 3NF
+### 2. Quản lý hợp đồng cầm cố
 
-### Cài đặt SQL
+- Tạo hợp đồng vay mới.
+- Cập nhật trạng thái hợp đồng.
+- Theo dõi thời hạn thanh toán.
+- Gia hạn hợp đồng.
 
-#### Event 1: Đăng ký hợp đồng mới
+### 3. Quản lý tài sản thế chấp
 
-- Tạo Store Procedure lưu:
-  - Thông tin khách hàng
-  - Danh sách tài sản
-  - Giá trị định giá
-  - Số tiền vay
-  - Deadline 1 và Deadline 2
+- Lưu danh sách tài sản cầm cố.
+- Định giá tài sản.
+- Theo dõi trạng thái tài sản:
+  - Đang cầm cố
+  - Đã trả khách
+  - Sẵn sàng thanh lý
+  - Đã bán thanh lý
 
-#### Event 2: Tính công nợ
+### 4. Quản lý công nợ
 
-- Function tính tiền theo giao dịch
-- Function tính tổng nợ hợp đồng
-- Hỗ trợ tính lãi kép
+- Tính lãi đơn.
+- Tính lãi kép.
+- Tính tổng số tiền cần thanh toán.
+- Theo dõi dư nợ hiện tại.
 
-#### Event 3: Xử lý trả nợ
+### 5. Xử lý thanh toán
 
-- Cập nhật số tiền trả
-- Ghi log thanh toán
-- Cập nhật trạng thái hợp đồng
-- Gợi ý tài sản được trả lại
+- Khách hàng trả nợ từng phần.
+- Ghi nhận lịch sử thanh toán.
+- Cập nhật số tiền còn nợ.
+- Hoàn trả tài sản khi đủ điều kiện.
 
-#### Event 4: Danh sách nợ xấu
+### 6. Quản lý nợ xấu
 
-Hiển thị:
-- Tên khách hàng
+- Danh sách khách hàng quá hạn.
+- Tính số ngày quá hạn.
+- Thống kê tổng nợ hiện tại.
+- Dự đoán số nợ sau thời gian tiếp theo.
+
+### 7. Quản lý thanh lý tài sản
+
+- Tự động chuyển trạng thái quá hạn.
+- Đưa tài sản sang trạng thái thanh lý.
+- Cập nhật trạng thái đã bán thanh lý.
+
+### 8. Audit Log
+
+- Lưu lịch sử giao dịch.
+- Theo dõi người thu tiền.
+- Theo dõi thời gian thanh toán.
+- Theo dõi biến động số dư.
+
+## 4. Nhiệm vụ cụ thể của sinh viên
+### Nhiệm vụ 1: Thiết kế CSDL
+
+- Vẽ sơ đồ ERD:
+  - Thể hiện rõ thực thể
+  - Thuộc tính
+  - Khóa chính
+  - Khóa ngoại
+
+- Chuyển sơ đồ thành các bảng.
+- Chuẩn hóa tối thiểu mức 3NF.
+
+### Quan hệ dữ liệu
+
+- 1 Khách hàng có thể có nhiều Hợp đồng.
+- 1 Hợp đồng có thể cầm cố nhiều Tài sản.
+- 1 Hợp đồng phát sinh theo thời gian nhiều lần biến động trạng thái hoặc số tiền nợ.
+
+## Nhiệm vụ 2: Cài đặt SQL (Yêu cầu viết Scripts)
+
+### Event 1: Đăng ký hợp đồng mới (Vay tiền)
+
+Viết Store Procedure tiếp nhận hợp đồng:
+- Lưu thông tin khách hàng.
+- Danh sách tài sản.
+- Giá trị định giá.
+- Số tiền vay gốc.
+- Thiết lập 2 mốc:
+  - Deadline1
+  - Deadline2
+
+### Event 2: Tính toán công nợ thời gian thực
+
+Viết Function:
+
+#### fn_CalcMoneyTransaction(TransactionID, TargetDate)
+
+- Tính số tiền phải trả của TransactionID đến ngày TargetDate.
+
+#### fn_CalcMoneyContract(ContractID, TargetDate)
+
+- Tính tổng số tiền khách phải trả:
+  - Gốc
+  - Lãi đơn
+  - Lãi kép
+
+Gợi ý:
+- Sử dụng hàm tính lũy thừa hoặc vòng lặp để xử lý lãi kép.
+
+### Event 3: Xử lý trả nợ và hoàn trả tài sản
+
+Viết Store Procedure xử lý khi khách mang tiền đến.
+
+#### Nếu tài sản đã bị thanh lý
+(Sau Deadline 2 và có cờ IsSold)
+
+- Thông báo không thu tiền.
+- Không trả đồ.
+
+#### Nếu tài sản chưa bị thanh lý
+
+- Tính tổng nợ.
+- Trừ số tiền khách trả vào hệ thống.
+
+#### Nếu trả hết tiền
+
+- Trả hết đồ.
+- Cập nhật trạng thái hợp đồng:
+  - Đã thanh toán đủ.
+
+#### Nếu chưa trả hết tiền gốc + lãi
+
+- Cập nhật trạng thái hợp đồng:
+  - Đang trả góp.
+
+- Ghi nhận vào LOG:
+  - Số tiền đã trả.
+  - Số tiền còn nợ.
+
+### Danh sách gợi ý trả lại tài sản
+
+Điều kiện:
+- Giá trị tài sản còn lại >= dư nợ còn lại.
+
+### Event 4: Truy vấn danh sách nợ xấu (Nợ khó đòi)
+
+Xuất danh sách các khách hàng:
+- Đã quá Deadline 1.
+- Chưa thanh toán.
+
+### Các cột yêu cầu
+
+- Tên KH
 - Số điện thoại
+- Số tiền vay gốc
 - Số ngày quá hạn
-- Tổng tiền hiện tại
-- Tổng tiền sau 1 tháng
+- Tổng tiền phải trả hiện tại
+- Tổng số tiền phải trả sau 1 tháng
 
-#### Event 5: Trigger tự động
+Gợi ý:
+- Nên viết Function hỗ trợ.
 
-- Chuyển trạng thái quá hạn
-- Chuyển trạng thái thanh lý
-- Cập nhật trạng thái tài sản
+### Event 5: Quản lý thanh lý tài sản
 
----
+#### Trigger 1
 
-## 4. Chức năng bổ sung
+Tự động chuyển trạng thái hợp đồng sang:
+- Quá hạn (nợ xấu)
+
+Điều kiện:
+- Hợp đồng đang ở trạng thái "Đang vay"
+- Ngày vượt quá Deadline 1
+
+#### Trigger 2
+
+Tự động chuyển trạng thái tài sản sang:
+- Sẵn sàng thanh lý
+
+Điều kiện:
+- Hợp đồng đang ở trạng thái "Quá hạn (nợ xấu)"
+- Ngày vượt quá Deadline 2
+
+#### Tự động chuyển trạng thái tài sản thành:
+- Đã bán thanh lý
+
+Điều kiện:
+- Trạng thái hợp đồng chuyển sang:
+  - Đã thanh lý
+
+### Trạng thái tài sản
+
+- Đang cầm cố
+- Đã trả khách
+- Đã bán thanh lý
+
+## 5. Các sự kiện bổ sung
 
 ### Gia hạn hợp đồng
 
-- Khách trả lãi để gia hạn deadline
+Khách đến trả toàn bộ tiền lãi tính đến thời điểm hiện tại để:
+- Dời Deadline 1
+- Dời Deadline 2
+- Tránh bị tính lãi kép
 
-### Audit Log
+### Lịch sử hợp đồng (Audit Log)
 
-- Lưu lịch sử trả tiền
-- Theo dõi người thu tiền
-- Theo dõi số tiền còn nợ
+CSDL cần có bảng Log để ghi lại:
+- Ngày trả
+- Số tiền trả
+- Người thu tiền
 
----
+Mục đích:
+- Tránh việc ghi đè số tổng nợ
+- Theo dõi lịch sử dòng tiền
 
-## 5. File bài tập
 
-- File báo cáo PDF
-- File script SQL
-- README.md
-- Ảnh minh họa quá trình làm bài
 
-### Link file PDF
 
-[📄 Xem file PDF](btvn03_VHM.pdf)
 
----
-
-## 6. Hạn nộp bài
-
-23:59:59 ngày 12/05/2026
-vết dòng tiền.
 
