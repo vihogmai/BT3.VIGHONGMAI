@@ -272,17 +272,39 @@ Viết Function:
 
 #### fn_CalcMoneyTransaction(TransactionID, TargetDate)
 
-- Tính số tiền phải trả của TransactionID đến ngày TargetDate.
+- Tính số tiền phải trả của TransactionID đến ngày TargetDate. Tính số tiền khách đã trả trong 1 giao dịch cụ thể tính đến ngày chốt (TargetDate)
+  
+  <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/2dd5f4a5-7399-4349-abee-3c23483a3b50" />
+
+Sử dụng điều kiện NgayTra <= @TargetDate.
+
+Nếu ngày khách trả tiền nằm sau ngày chốt, hàm trả về 0.
+
+Nếu ngày khách trả tiền nằm trước hoặc đúng ngày chốt, hàm trả về số tiền thực tế đã trả.
+
+Giúp báo cáo công nợ chính xác tại bất kỳ thời điểm nào trong quá khứ mà không bị lẫn lộn với các giao dịch phát sinh sau đó.
 
 #### fn_CalcMoneyContract(ContractID, TargetDate)
 
-- Tính tổng số tiền khách phải trả:
+- Tính tổng số tiền khách phải trả. Tính tổng nợ thực tế (Gốc + Lãi) của một hợp đồng tại thời điểm bất kỳ.
   - Gốc
-  - Lãi đơn
-  - Lãi kép
 
-Gợi ý:
-- Sử dụng hàm tính lũy thừa hoặc vòng lặp để xử lý lãi kép.
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/b344cdbe-4673-46b7-b9b1-b8a24bb6bb24" />
+
+Tiền gốc: Giá trị vay ban đầu được lấy từ bảng HopDong
+  - Lãi đơn
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/1912bdbf-4e60-4da1-aa19-58e549c5c822" />
+    
+
+ Lãi đơn: Áp dụng công thức $Gốc + (Gốc \times r \times n)$ cho giai đoạn trong hạn (trước mốc Deadline1).   
+  - Lãi kép
+    
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/1e0b4667-a1ff-4aff-a758-99826f518310" />
+
+Nếu ngày kiểm tra vượt quá Deadline1, hệ thống dùng hàm POWER để tính lãi kép chồng lên tổng nợ cũ (Gốc + Lãi đơn). Đây là cách tính toán nợ theo cấp số nhân cho giai đoạn quá hạn.
+
+
 
 ### Event 3: Xử lý trả nợ và hoàn trả tài sản
 
