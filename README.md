@@ -384,17 +384,6 @@ Tổng nợ hiện tại: Sử dụng hàm fn_TinhNoXau để tính toán cả G
 
 Nợ sau 1 tháng (Dự báo): Đây là tính năng quản trị. Hệ thống tự động tính toán số tiền khách sẽ phải trả nếu tiếp tục nợ thêm 30 ngày nữa. Con số này dùng để gây áp lực hoặc thuyết phục khách hàng thanh toán sớm nhằm tránh lãi chồng lãi..
 
-### Các cột yêu cầu
-
-- Tên KH
-- Số điện thoại
-- Số tiền vay gốc
-- Số ngày quá hạn
-- Tổng tiền phải trả hiện tại
-- Tổng số tiền phải trả sau 1 tháng
-
-Gợi ý:
-- Nên viết Function hỗ trợ.
 
 ### Event 5: Quản lý thanh lý tài sản
 
@@ -402,6 +391,7 @@ Gợi ý:
 
 Tự động chuyển trạng thái hợp đồng sang:
 - Quá hạn (nợ xấu)
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/b72476f3-2e68-4096-86be-a9173c81aa60" />
 
 Điều kiện:
 - Hợp đồng đang ở trạng thái "Đang vay"
@@ -411,6 +401,7 @@ Tự động chuyển trạng thái hợp đồng sang:
 
 Tự động chuyển trạng thái tài sản sang:
 - Sẵn sàng thanh lý
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/94687616-c8f9-4d2b-843a-ede40a63e1d6" />
 
 Điều kiện:
 - Hợp đồng đang ở trạng thái "Quá hạn (nợ xấu)"
@@ -418,6 +409,7 @@ Tự động chuyển trạng thái tài sản sang:
 
 #### Tự động chuyển trạng thái tài sản thành:
 - Đã bán thanh lý
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/5ce623d7-f940-479d-b470-d10410d02f87" />
 
 Điều kiện:
 - Trạng thái hợp đồng chuyển sang:
