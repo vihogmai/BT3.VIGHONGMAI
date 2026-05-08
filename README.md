@@ -369,8 +369,20 @@ Minh bạch: Việc lưu lại MaHD, NgayTra, SoTienTra giúp chủ tiệm có t
 ### Event 4: Truy vấn danh sách nợ xấu (Nợ khó đòi)
 
 Xuất danh sách các khách hàng:
-- Đã quá Deadline 1.
-- Chưa thanh toán.
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/4d3b6693-3bb5-4dec-972d-601b25c23b26" />
+
+Những hợp đồng có Deadline 1 < GETDATE() (đã quá hạn cam kết lần 1) và TrangThai <> 'Đã thanh toán đủ'.
+
+Sắp xếp: Danh sách được ưu tiên theo Số ngày quá hạn giảm dần (người nợ lâu nhất hiện lên đầu) để bộ phận thu hồi nợ dễ dàng theo dõi.
+
+ NHƯ TRONH ẢNH 
+
+Số ngày quá hạn: Tính bằng hàm DATEDIFF từ Deadline 1 đến ngày hôm nay. Đây là thước đo mức độ rủi ro của khoản vay.
+
+Tổng nợ hiện tại: Sử dụng hàm fn_TinhNoXau để tính toán cả Gốc + Lãi lũy tiến đến thời điểm hiện tại. Điều này giúp nhân viên báo con số chính xác cho khách hàng ngay lập tức.
+
+Nợ sau 1 tháng (Dự báo): Đây là tính năng quản trị. Hệ thống tự động tính toán số tiền khách sẽ phải trả nếu tiếp tục nợ thêm 30 ngày nữa. Con số này dùng để gây áp lực hoặc thuyết phục khách hàng thanh toán sớm nhằm tránh lãi chồng lãi..
 
 ### Các cột yêu cầu
 
