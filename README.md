@@ -343,12 +343,28 @@ vd: Dòng tiền vào: Bạn truyền vào tham số @SoTienTra = 2.000.000.Xử
 
 Khi trả hết tiền	Khối IF @DuNoConLai <= 0	Tự động chuyển trạng thái hợp đồng thành "Đã thanh toán đủ" và giải phóng tài sản kho
 
-#### ![Uploading image.png…]()
+Nhật ký Giao dịch (Logging)
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/c0440580-eb0d-4e9f-b6f4-fb693f6839ef" />
+
+Ghi nhận: Mọi khoản tiền khách mang đến đều được INSERT vào bảng LichSuThanhToan.
+
+Minh bạch: Việc lưu lại MaHD, NgayTra, SoTienTra giúp chủ tiệm có thể đối soát dòng tiền theo ngày, tránh nhân viên gian lận hoặc nhầm lẫn
 
 ### Danh sách gợi ý trả lại tài sản
 
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/ca16fb3f-bffb-4125-90d8-b5067835024e" />
+
 Điều kiện:
 - Giá trị tài sản còn lại >= dư nợ còn lại.
+
+ Đây là phần quan trọng nhất để bảo vệ nguồn vốn của chủ tiệm. Hệ thống chỉ gợi ý trả lại một món đồ cụ thể nếu tổng giá trị định giá của các món đồ còn lại trong kho vẫn đủ lớn hơn hoặc bằng số nợ khách chưa trả xong.
+
+ (Tổng giá trị các tài sản hiện có) - (Giá trị món đồ định trả) >= Dư nợ còn lại.
+
+ Giúp chủ tiệm có thể linh hoạt trả bớt đồ cho khách để giải phóng kho bãi nhưng vẫn giữ lại đủ tài sản có giá trị làm vật thế chấp an toàn cho số nợ còn lại.
+
+ Trong hình ảnh kết quả, khi món đồ 'Xe máy Honda' có IsSold = 1, hệ thống đã xuất bảng CẢNH BÁO và chặn đứng giao dịch thành công theo đúng yêu cầu đề bài. 
 
 ### Event 4: Truy vấn danh sách nợ xấu (Nợ khó đòi)
 
