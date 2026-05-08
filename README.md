@@ -313,8 +313,16 @@ Viết Store Procedure xử lý khi khách mang tiền đến.
 #### Nếu tài sản đã bị thanh lý
 (Sau Deadline 2 và có cờ IsSold)
 
-- Thông báo không thu tiền.
-- Không trả đồ.
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/c1e2a55a-bdbe-475f-b001-574893dcf99b" />
+
+Trong ảnh: (IF EXISTS): Đóng vai trò là "người gác cổng". Hệ thống sẽ lục soát trong bảng TaiSan xem có món đồ nào của hợp đồng này đã bị bán (IsSold = 1) hay chưa.
+
+(SELECT): Thay vì báo lỗi hệ thống khó hiểu, câu lệnh này xuất ra một cái Bảng thông báo đã thanh lý,  để nhân viên biết rõ lý do từ chối thu tiền.
+
+(ROLLBACK & RETURN): Đây là lệnh bảo mật. ROLLBACK xóa sạch lệnh thu tiền vừa nhập, và RETURN bắt máy tính dừng lại ngay, không chạy tiếp các bước trả đồ hay trừ nợ bên dưới.
+
+Kết quả: bảng LichSuThanhToan không hề tăng thêm tiền, đảm bảo tính an toàn tuyệt đối khi tài sản không còn trong kho.
+
 
 #### Nếu tài sản chưa bị thanh lý
 
