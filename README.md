@@ -410,17 +410,20 @@ Tự động chuyển trạng thái tài sản sang:
 
 #### Tự động chuyển trạng thái tài sản thành:
 - Đã bán thanh lý
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/5ce623d7-f940-479d-b470-d10410d02f87" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/b37f53c8-a11b-4a55-9c00-df00815bfb85" />
+
 
 Điều kiện:
 - Trạng thái hợp đồng chuyển sang:
   - Đã thanh lý
+  - 
+Đang cầm cố: Khách vẫn đang vay, đồ nằm trong kho an toàn.
 
-### Trạng thái tài sản
+Sẵn sàng thanh lý: Quá Deadline 2, đồ được chuyển ra khu vực chờ bán.
 
-- Đang cầm cố
-- Đã trả khách
-- Đã bán thanh lý
+Đã bán thanh lý: Giao dịch bán đồ hoàn tất, cờ IsSold bật lên để chặn thu tiền lãi (Event 3).
+
+Bạn chụp ảnh bảng kết quả ở Bước 1 (hiện Sẵn sàng thanh lý) và Bước 2 (hiện Đã bán thanh lý) 
 
 ## 5. Các sự kiện bổ sung
 
