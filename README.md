@@ -136,7 +136,9 @@ Trả nợ gốc (HĐ 1):** Gốc giảm từ 10tr xuống **8,000,000đ**, lãi
 ## 4. Nhiệm vụ cụ thể của sinh viên
 ### Nhiệm vụ 1: Thiết kế CSDL
 
-- Vẽ sơ đồ ERD:
+- Vẽ sơ đồ ERD:\
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/5432676e-8ce8-439f-84f3-a0308281e6bc" />
+
   - Thể hiện rõ thực thể
   - Thuộc tính
   - Khóa chính
