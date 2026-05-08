@@ -401,7 +401,8 @@ Tự động chuyển trạng thái hợp đồng sang:
 
 Tự động chuyển trạng thái tài sản sang:
 - Sẵn sàng thanh lý
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/94687616-c8f9-4d2b-843a-ede40a63e1d6" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/37997463-4305-4b8a-92b0-36b12dd854b2" />
+
 
 Điều kiện:
 - Hợp đồng đang ở trạng thái "Quá hạn (nợ xấu)"
