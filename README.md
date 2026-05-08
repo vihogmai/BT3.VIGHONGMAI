@@ -139,10 +139,11 @@ Trả nợ gốc (HĐ 1):** Gốc giảm từ 10tr xuống **8,000,000đ**, lãi
 - Vẽ sơ đồ ERD:\
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/5432676e-8ce8-439f-84f3-a0308281e6bc" />
 
-  - Thể hiện rõ thực thể
-  - Thuộc tính
-  - Khóa chính
-  - Khóa ngoại
+  -Thực thể (Entities): Chính là các bảng như KhachHang, HopDong, TaiSan, LichSuThanhToan.
+  Thuộc tính (Attributes): Các cột trong bảng như MaKH, TenKH, SoTienVay,....
+  Mối quan hệ (Relationships): Các đường kẻ nối giữa các bảng thể hiện quan hệ $1:N$ (một-nhiều).
+  Ví dụ: Một khách hàng có nhiều hợp đồng.
+  Khóa chính/Khóa ngoại: Có biểu tượng chiếc chìa khóa (PK) và các đường nối thể hiện khóa ngoại (FK)
 
 - Chuyển sơ đồ thành các bảng.
 - Chuẩn hóa tối thiểu mức 3NF.
