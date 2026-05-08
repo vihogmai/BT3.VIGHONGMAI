@@ -156,7 +156,8 @@ Trả nợ gốc (HĐ 1):** Gốc giảm từ 10tr xuống **8,000,000đ**, lãi
 - 1 Hợp đồng phát sinh theo thời gian nhiều lần biến động trạng thái hoặc số tiền nợ.
 
 
-Bảng Khách Hàng (KhachHang)
+1. Bảng Khách Hàng (KhachHang)
+   
 Lưu trữ thông tin định danh và liên lạc duy nhất của từng khách hàng.
 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/6cee7902-a043-4e7d-b496-b2d2b71b85c5" />
@@ -171,10 +172,10 @@ SDT: Số điện thoại liên lạc.
 CCCD: Số Căn cước công dân (Duy nhất).
 
 2. Bảng Hợp Đồng (HopDong)
-   
-   <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/a5fa60fe-8653-4124-b2ae-1a7880e3ed4d" />
 
 Quản lý các khoản vay vốn. Chứa khóa ngoại để xác định chủ sở hữu hợp đồng.
+   
+   <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/a5fa60fe-8653-4124-b2ae-1a7880e3ed4d" />
 
 MaHD (PK): Khóa chính của hợp đồng.
 
@@ -188,9 +189,9 @@ TrangThai: Tình trạng hợp đồng (Đang vay, Quá hạn, Đã tất toán)
 
 3. Bảng Tài Sản (TaiSan)
 
-   <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/ede4f3ea-7cd5-4ca7-8405-479a071b3ac5" />
-
 Quản lý danh sách các món đồ cầm cố. Một hợp đồng có thể cầm cố nhiều tài sản khác nhau.
+
+   <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/ede4f3ea-7cd5-4ca7-8405-479a071b3ac5" />
 
 MaTS (PK): Khóa chính của tài sản.
 
@@ -199,6 +200,23 @@ MaHD (FK): Khóa ngoại nối với bảng HopDong.
 TenTS: Tên gọi hoặc mô tả tài sản.
 
 GiaTriDinhGia: Giá trị tài sản sau khi thẩm định.
+
+4. Bảng Nhật Ký Biến Động (LichSuThanhToan)
+
+Mục đích: Theo dõi chi tiết các lần trả nợ từng phần theo thời gian.
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/5b023d40-3d2d-41e4-a120-22a21dd6bc8f" />
+
+
+MaLog (PK): Khóa chính bản ghi nhật ký.
+
+MaHD (FK): Khóa ngoại nối với bảng HopDong.
+
+NgayTra: Ngày giờ thực hiện thanh toán.
+
+SoTienTra: Số tiền thanh toán thực tế (Gốc/Lãi).
+
+NguoiThu: Tên nhân viên tiếp nhận giao dịch.
 ## Nhiệm vụ 2: Cài đặt SQL (Yêu cầu viết Scripts)
 
 ### Event 1: Đăng ký hợp đồng mới (Vay tiền)
