@@ -231,6 +231,9 @@ Viết Store Procedure tiếp nhận hợp đồng:
 
 Lưu thông tin khách hàng (Customer Handling):
 
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/33464303-3b96-4222-b413-ef20a1508614" />
+
+
 Sử dụng logic kiểm tra CCCD để phân loại:
 
 Khách mới: Thực hiện INSERT vào bảng KhachHang.
@@ -241,6 +244,10 @@ Sử dụng SCOPE_IDENTITY() để truy xuất ID vừa tạo, phục vụ nối
 
 Quản lý Danh sách tài sản & Định giá (Assets Management):
 
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d15fee87-bdd2-41a4-aa38-2cf94beb27cf" />
+
+
+
 Tiếp nhận danh sách tài sản thông qua Table-Valued Parameter (@DanhSachTS).
 
 Cho phép một hợp đồng cầm cố nhiều tài sản cùng lúc ($1:N$).
@@ -250,6 +257,9 @@ Lưu trữ chi tiết tên tài sản và giá trị định giá thẩm định
 Lưu trữ khoản nợ gốc tại bảng HopDong.Đây là cơ sở dữ liệu đầu vào để hệ thống tính toán lãi đơn và lãi kép dựa trên biến động thời gian thực.
 
 Thiết lập 2 mốc Deadline tự động (Deadlines Setup):
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/a0565f0b-bc20-4b0d-914d-6aafe9daa425" />
+
 
 Sử dụng hàm DATEADD để tự động hóa hoàn toàn các mốc thời gian quan trọng:Deadline1 (+30 ngày): Hạn chốt tính lãi đơn. Sau ngày này hệ thống tự động chuyển trạng thái tính lãi kép.Deadline2 (+60 ngày): 
 
