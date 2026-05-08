@@ -326,23 +326,24 @@ Kết quả: bảng LichSuThanhToan không hề tăng thêm tiền, đảm bảo
 
 #### Nếu tài sản chưa bị thanh lý
 
-- Tính tổng nợ.
+ Tính tổng nợ
+ 
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/230e794e-920f-4bdb-b2f1-9c945744efab" />
+
+Lệnh đặc trưng: (@TongGiaTriTaiSan - GiaTriDinhGia) >= @DuNoConLaiGiải thích thực tế: Nhìn vào bảng kết quả thứ 3 trong Ảnh 3, bạn thấy Xe máy Honda và iPhone 15.Hệ thống không chỉ liệt kê tài sản khách đang cầm.Nó tính toán: "Nếu trả lại cái xe máy (25 triệu), thì số đồ còn lại có đủ giá trị để bù cho khoản nợ 8,35 triệu không?".Vì $25.000.000 > 8.350.000$, nên nó hiện ra để gợi ý cho nhân viên biết là "Trả đồ này cho khách vẫn an 
+
 - Trừ số tiền khách trả vào hệ thống.
 
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/b3ff8a98-2f74-4c19-9352-6e5c1092a956" />
+
+vd: Dòng tiền vào: Bạn truyền vào tham số @SoTienTra = 2.000.000.Xử lý hệ thống: * Hệ thống gọi hàm fn_CalcMoneyContract để biết tổng nợ hiện tại (ví dụ là 10.350.000).Nó thực hiện phép trừ: $10.350.000 - 2.000.000 = 8.350.000$.Kết quả trên màn hình: Tại cột NoConLai, bạn thấy con số 8.350.000. Điều này chứng minh số tiền khách trả đã được trừ vào tổng nợ thành công.Ghi nhận nhật ký (Log): Ngay sau khi trừ, lệnh INSERT INTO LichSuThanhToan sẽ lưu lại con số 2.000.000 này kèm theo dư nợ còn lại để làm bằng chứng thu tiền (như bạn thấy trong bảng Log có 8 dòng ở cuối ảnh)
 #### Nếu trả hết tiền
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/1233c59c-09c5-478a-8dc1-62745232bdd9" />
 
-- Trả hết đồ.
-- Cập nhật trạng thái hợp đồng:
-  - Đã thanh toán đủ.
 
-#### Nếu chưa trả hết tiền gốc + lãi
+Khi trả hết tiền	Khối IF @DuNoConLai <= 0	Tự động chuyển trạng thái hợp đồng thành "Đã thanh toán đủ" và giải phóng tài sản kho
 
-- Cập nhật trạng thái hợp đồng:
-  - Đang trả góp.
-
-- Ghi nhận vào LOG:
-  - Số tiền đã trả.
-  - Số tiền còn nợ.
+#### ![Uploading image.png…]()
 
 ### Danh sách gợi ý trả lại tài sản
 
